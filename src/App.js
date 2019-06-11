@@ -1,26 +1,42 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Route, Switch } from 'react-router-dom';
 import './App.css';
+import ProtectedRoute from './ProtectedRoute';
+import Login from './components/auth/Login';
+import Signup from './components/auth/Signup';
+import Recipes from './components/Recipes';
+import Recipe from './components/Recipe';
+import CreateRecipe from './components/CreateRecipe';
+import UpdateRecipe from './components/UpdateRecipe';
+import OwnRecipes from './components/OwnRecipes';
+import OwnRecipe from './components/OwnRecipe';
+import PageNotFound from './components/ui/PageNotFound';
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Switch>
+        <Route exact path="/" component={Recipes} />
+        <Route exact path="/recipes" component={Recipes} />
+        <ProtectedRoute exact path="/recipes/new" component={CreateRecipe} />
+        <Route exact path="/recipes/:recipeId" component={Recipe} />
+        <ProtectedRoute
+          exact
+          path="/recipes/:recipeId/modify"
+          component={UpdateRecipe}
+        />
+        <ProtectedRoute exact path="/myrecipes" component={OwnRecipes} />
+        <ProtectedRoute
+          exact
+          path="/myrecipes/:recipeId"
+          component={OwnRecipe}
+        />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup} />
+        <Route component={PageNotFound} />
+      </Switch>
     </div>
   );
-}
+};
 
 export default App;
