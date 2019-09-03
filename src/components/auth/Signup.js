@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
@@ -6,7 +6,11 @@ import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import Spinner from '../ui/Spinner';
 import TopNavBar from '../ui/TopNavBar';
-import { signup, signupClear } from '../../store/actions/users';
+import {
+  signup,
+  signupClear,
+  clearErrorMessage
+} from '../../store/actions/users';
 
 const useStyles = makeStyles(theme => ({
   formContainer: {
@@ -31,10 +35,27 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Signup = ({ error, loading, signedUp, signup, signupClear }) => {
+const Signup = ({
+  error,
+  clearErrorMessage,
+  loading,
+  signedUp,
+  signup,
+  signupClear
+}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
+
+  useEffect(
+    () => {
+      // Clear possible previous error message when the component mounts.
+      if (error) {
+        clearErrorMessage();
+      }
+    }, // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
 
   const handleSignup = event => {
     event.preventDefault();
@@ -144,5 +165,5 @@ const mapStateToProps = ({ user: { error, signedUp, loading } }) => {
 
 export default connect(
   mapStateToProps,
-  { signup, signupClear }
+  { signup, signupClear, clearErrorMessage }
 )(Signup);

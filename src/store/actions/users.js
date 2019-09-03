@@ -97,3 +97,7 @@ const getOwnRecipesFail = error => ({
   type: actionTypes.GET_OWN_RECIPES_FAIL,
   error
 });
+
+export const clearErrorMessage = () => ({
+  type: actionTypes.CLEAR_ERROR_MESSAGE
+});

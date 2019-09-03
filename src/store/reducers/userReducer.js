@@ -81,6 +81,11 @@ const userReducer = (state = initialState, action) => {
         loading: false,
         error: action.error
       };
+    case actionTypes.CLEAR_ERROR_MESSAGE:
+      return {
+        ...state,
+        error: null
+      };
     default:
       return state;
   }

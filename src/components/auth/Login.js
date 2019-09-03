@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Spinner from '../ui/Spinner';
 import TopNavBar from '../ui/TopNavBar';
 import { login } from '../../store/actions/users';
+import { clearErrorMessage } from '../../store/actions/users';
 
 const useStyles = makeStyles(theme => ({
   formContainer: {
@@ -35,7 +36,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Login = ({ error, loading, login, location }) => {
+const Login = ({ error, clearErrorMessage, loading, login, location }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [signupMessage, setSignupMessage] = useState('');
@@ -47,6 +48,16 @@ const Login = ({ error, loading, login, location }) => {
       setSignupMessage('Login with your username and password.');
     }
   }, [params]);
+
+  useEffect(
+    () => {
+      // Clear possible previous error message when the component mounts.
+      if (error) {
+        clearErrorMessage();
+      }
+    }, // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -121,5 +132,5 @@ const mapStateToProps = ({ user: { error, loading } }) => {
 
 export default connect(
   mapStateToProps,
-  { login }
+  { login, clearErrorMessage }
 )(Login);
