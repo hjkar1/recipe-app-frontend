@@ -19,16 +19,42 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Recipes = ({ error, loading, recipes, getRecipes }) => {
+  const recipesPerPage = 20;
+
   const [searchTerms, setSearchTerms] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     getRecipes();
   }, [getRecipes]);
 
+  useEffect(() => {
+    // The displayed recipe list is updated whenever this component receives
+    // a new list of recipes.
+    setSearchResults(recipes.slice(0, recipesPerPage));
+  }, [recipes]);
+
   const classes = useStyles();
 
   const handleSearchTextChange = searchTerms => {
     setSearchTerms(searchTerms);
+
+    // Filter the recipes (title or ingredients) that match the user's search terms.
+    const filteredRecipes = recipes.filter(
+      recipe =>
+        recipe.title.toLowerCase().indexOf(searchTerms.toLowerCase()) > -1 ||
+        recipe.ingredients.toLowerCase().indexOf(searchTerms.toLowerCase()) > -1
+    );
+
+    const lastRecipeIndex = currentPage * recipesPerPage;
+    const firstRecipeIndex = lastRecipeIndex - recipesPerPage;
+
+    const currentRecipes = filteredRecipes.slice(
+      firstRecipeIndex,
+      lastRecipeIndex
+    );
+    setSearchResults(currentRecipes);
   };
 
   let pageContent = null;
@@ -40,21 +66,16 @@ const Recipes = ({ error, loading, recipes, getRecipes }) => {
   } else {
     pageContent = (
       <div className={classes.container}>
-        {recipes
-          .filter(
-            recipe =>
-              recipe.title.toLowerCase().indexOf(searchTerms.toLowerCase()) > -1
-          )
-          .map(recipe => (
-            <Link
-              className={classes.recipeLink}
-              key={recipe._id}
-              component={RouterLink}
-              to={`/recipes/${recipe._id}`}
-            >
-              {recipe.title}
-            </Link>
-          ))}
+        {searchResults.map(recipe => (
+          <Link
+            className={classes.recipeLink}
+            key={recipe._id}
+            component={RouterLink}
+            to={`/recipes/${recipe._id}`}
+          >
+            {recipe.title}
+          </Link>
+        ))}
       </div>
     );
   }
