@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
+import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import { getRecipes } from '../store/actions/recipes';
@@ -14,16 +15,19 @@ const useStyles = makeStyles(theme => ({
   },
   recipeLink: {
     display: 'block',
-    margin: theme.spacing(1)
+    margin: theme.spacing(2)
+  },
+  showMoreButton: {
+    marginTop: theme.spacing(2)
   }
 }));
 
 const Recipes = ({ error, loading, recipes, getRecipes }) => {
   const recipesPerPage = 20;
-
-  const [searchTerms, setSearchTerms] = useState('');
+  const [filterText, setFilterText] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [moreToShow, setMoreToShow] = useState(true);
 
   useEffect(() => {
     getRecipes();
@@ -37,27 +41,60 @@ const Recipes = ({ error, loading, recipes, getRecipes }) => {
 
   const classes = useStyles();
 
-  const handleSearchTextChange = searchTerms => {
-    setSearchTerms(searchTerms);
+  const handleSearchTermsChange = searchTerms => {
+    setFilterText(searchTerms);
+    setCurrentPage(1);
+    const filteredRecipes = filterRecipes(searchTerms);
+    const currentRecipes = changeDisplayedRecipeList(filteredRecipes, 1);
+    setSearchResults(currentRecipes);
+    toggleShowMore(1, filteredRecipes);
+  };
 
+  // Increase the amount of currently displayed recipes.
+  const handleShowMore = () => {
+    const newPage = currentPage + 1;
+    const filteredRecipes = filterRecipes(filterText);
+    const currentRecipes = changeDisplayedRecipeList(filteredRecipes, newPage);
+    setSearchResults(currentRecipes);
+    setCurrentPage(newPage);
+    toggleShowMore(newPage, filteredRecipes);
+  };
+
+  // The number of recipes to show is greater than the current amount
+  // of visible recipe -> enable displaying more. Otherwise disable it.
+  const toggleShowMore = (pageNumber, recipeList) => {
+    if (recipesPerPage * pageNumber < recipeList.length) {
+      setMoreToShow(true);
+    } else {
+      setMoreToShow(false);
+    }
+  };
+
+  // Make a new list of displayed recipes based on the current page number.
+  const changeDisplayedRecipeList = (recipeList, pageNumber) => {
+    const lastRecipeIndex = pageNumber * recipesPerPage;
+    const currentRecipes = recipeList.slice(0, lastRecipeIndex);
+    return currentRecipes;
+  };
+
+  const filterRecipes = searchTerms => {
     // Filter the recipes (title or ingredients) that match the user's search terms.
     const filteredRecipes = recipes.filter(
       recipe =>
         recipe.title.toLowerCase().indexOf(searchTerms.toLowerCase()) > -1 ||
         recipe.ingredients.toLowerCase().indexOf(searchTerms.toLowerCase()) > -1
     );
-
-    const lastRecipeIndex = currentPage * recipesPerPage;
-    const firstRecipeIndex = lastRecipeIndex - recipesPerPage;
-
-    const currentRecipes = filteredRecipes.slice(
-      firstRecipeIndex,
-      lastRecipeIndex
-    );
-    setSearchResults(currentRecipes);
+    return filteredRecipes;
   };
 
   let pageContent = null;
+
+  // "Show more" button is displayed only if there is more recipes to show.
+  const showMoreButton = moreToShow ? (
+    <Button className={classes.showMoreButton} onClick={handleShowMore}>
+      Show more
+    </Button>
+  ) : null;
 
   if (loading) {
     pageContent = <Spinner />;
@@ -76,6 +113,7 @@ const Recipes = ({ error, loading, recipes, getRecipes }) => {
             {recipe.title}
           </Link>
         ))}
+        {showMoreButton}
       </div>
     );
   }
@@ -84,8 +122,8 @@ const Recipes = ({ error, loading, recipes, getRecipes }) => {
     <Fragment>
       <TopNavBar>
         <SearchBar
-          searchTerms={searchTerms}
-          handleChange={handleSearchTextChange}
+          searchTerms={filterText}
+          handleChange={handleSearchTermsChange}
         />
       </TopNavBar>
       {pageContent}
