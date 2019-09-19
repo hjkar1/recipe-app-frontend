@@ -53,6 +53,7 @@ const SearchBar = ({ searchTerms, handleChange }) => {
           <SearchIcon />
         </div>
         <InputBase
+          id="search"
           placeholder="Search"
           classes={{
             root: classes.inputRoot,
