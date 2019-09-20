@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
@@ -71,6 +72,14 @@ const RecipeForm = ({
       </form>
     </div>
   );
+};
+
+RecipeForm.propTypes = {
+  handleSubmit: PropTypes.func,
+  handleChange: PropTypes.func,
+  title: PropTypes.string,
+  instructions: PropTypes.string,
+  ingredients: PropTypes.string
 };
 
 export default RecipeForm;

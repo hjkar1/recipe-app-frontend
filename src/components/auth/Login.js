@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
@@ -121,6 +122,14 @@ const Login = ({ error, clearErrorMessage, loading, login, location }) => {
       </div>
     </Fragment>
   );
+};
+
+Login.propTypes = {
+  error: PropTypes.string,
+  clearErrorMessage: PropTypes.func,
+  loading: PropTypes.bool,
+  login: PropTypes.func,
+  location: PropTypes.object
 };
 
 const mapStateToProps = ({ user: { error, loading } }) => {

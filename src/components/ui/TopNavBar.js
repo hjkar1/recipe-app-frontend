@@ -1,6 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import { makeStyles } from '@material-ui/core/styles';
@@ -129,6 +130,11 @@ const TopNavBar = ({ children, logout }) => {
       </AppBar>
     </div>
   );
+};
+
+TopNavBar.propTypes = {
+  children: PropTypes.node,
+  logout: PropTypes.func
 };
 
 export default connect(

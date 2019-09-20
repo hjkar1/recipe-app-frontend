@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { createRecipe } from '../store/actions/recipes';
 import TopNavBar from './ui/TopNavBar';
 import RecipeForm from './RecipeForm';
@@ -53,6 +54,12 @@ const CreateRecipe = ({ error, loading, createRecipe }) => {
       {pageContent}
     </Fragment>
   );
+};
+
+CreateRecipe.propTypes = {
+  error: PropTypes.string,
+  loading: PropTypes.bool,
+  createRecipe: PropTypes.func
 };
 
 const mapStateToProps = ({ recipes: { error, loading } }) => {

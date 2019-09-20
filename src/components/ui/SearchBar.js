@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { makeStyles } from '@material-ui/core/styles';
@@ -66,6 +67,11 @@ const SearchBar = ({ searchTerms, handleChange }) => {
       </div>
     </Fragment>
   );
+};
+
+SearchBar.propTypes = {
+  searchTerms: PropTypes.string,
+  handleChange: PropTypes.func
 };
 
 export default SearchBar;

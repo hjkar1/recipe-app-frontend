@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Link from '@material-ui/core/Link';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
@@ -130,6 +131,13 @@ export const Recipes = ({ error, loading, recipes, getRecipes }) => {
       {pageContent}
     </Fragment>
   );
+};
+
+Recipes.propTypes = {
+  error: PropTypes.string,
+  loading: PropTypes.bool,
+  recipes: PropTypes.array,
+  getRecipes: PropTypes.func
 };
 
 const mapStateToProps = ({ recipes: { error, loading, recipes } }) => {

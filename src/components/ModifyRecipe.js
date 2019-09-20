@@ -1,13 +1,14 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { getRecipe, updateRecipe } from '../store/actions/recipes';
 import { getOwnRecipes } from '../store/actions/users';
 import TopNavBar from './ui/TopNavBar';
 import RecipeForm from './RecipeForm';
 import Spinner from './ui/Spinner';
 
-const UpdateRecipe = ({
+const ModifyRecipe = ({
   recipesError,
   recipesLoading,
   userError,
@@ -32,7 +33,6 @@ const UpdateRecipe = ({
 
   useEffect(() => {
     setModifiedRecipe(recipe);
-    console.log('useeffect');
   }, [recipe]);
 
   const handleChange = ({ target: { name, value } }) => {
@@ -85,6 +85,19 @@ const UpdateRecipe = ({
   );
 };
 
+ModifyRecipe.propTypes = {
+  recipesError: PropTypes.string,
+  recipesLoading: PropTypes.bool,
+  userError: PropTypes.string,
+  userLoading: PropTypes.bool,
+  recipe: PropTypes.object,
+  ownRecipes: PropTypes.array,
+  getRecipe: PropTypes.func,
+  updateRecipe: PropTypes.func,
+  getOwnRecipes: PropTypes.func,
+  recipeId: PropTypes.string
+};
+
 const mapStateToProps = ({ recipes, user }) => {
   return {
     recipesError: recipes.error,
@@ -99,4 +112,4 @@ const mapStateToProps = ({ recipes, user }) => {
 export default connect(
   mapStateToProps,
   { getRecipe, getOwnRecipes, updateRecipe }
-)(UpdateRecipe);
+)(ModifyRecipe);

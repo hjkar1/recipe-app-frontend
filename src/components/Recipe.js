@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { getRecipe } from '../store/actions/recipes';
 import TopNavBar from './ui/TopNavBar';
 import Spinner from './ui/Spinner';
@@ -57,6 +58,15 @@ const Recipe = ({
       {pageContent}
     </Fragment>
   );
+};
+
+Recipe.propTypes = {
+  error: PropTypes.string,
+  loading: PropTypes.bool,
+  recipe: PropTypes.object,
+  getRecipe: PropTypes.func,
+  children: PropTypes.node,
+  recipeId: PropTypes.string
 };
 
 const mapStateToProps = ({ recipes: { error, loading, recipe } }) => {

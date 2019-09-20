@@ -3,6 +3,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { getRecipes } from '../store/actions/recipes';
 import { getOwnRecipes } from '../store/actions/users';
 import TopNavBar from './ui/TopNavBar';
@@ -73,6 +74,17 @@ const OwnRecipes = ({
       {pageContent}
     </Fragment>
   );
+};
+
+OwnRecipes.propTypes = {
+  recipesError: PropTypes.string,
+  recipesLoading: PropTypes.bool,
+  userError: PropTypes.string,
+  userLoading: PropTypes.bool,
+  recipes: PropTypes.array,
+  ownRecipes: PropTypes.array,
+  getRecipes: PropTypes.func,
+  getOwnRecipes: PropTypes.func
 };
 
 const mapStateToProps = ({ recipes, user }) => {

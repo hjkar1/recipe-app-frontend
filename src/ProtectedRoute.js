@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 /* The protected page is rendered only if the user is logged in.
 Otherwise, the user is redirected to the login page.
@@ -23,6 +24,10 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
       }
     />
   );
+};
+
+ProtectedRoute.propTypes = {
+  component: PropTypes.object
 };
 
 export default ProtectedRoute;

@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -110,6 +111,17 @@ const OwnRecipe = ({
       </Recipe>
     </Fragment>
   );
+};
+
+OwnRecipe.propTypes = {
+  deleteRecipe: PropTypes.func,
+  getOwnRecipes: PropTypes.func,
+  recipesError: PropTypes.string,
+  recipesLoading: PropTypes.bool,
+  userError: PropTypes.string,
+  userLoading: PropTypes.bool,
+  ownRecipes: PropTypes.array,
+  match: PropTypes.object
 };
 
 const mapStateToProps = ({ recipes, user }) => {
