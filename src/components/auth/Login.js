@@ -87,7 +87,7 @@ const Login = ({ error, clearErrorMessage, loading, login, location }) => {
       <div className={classes.formContainer}>
         <h1>Login</h1>
         <div className={classes.signupMessage}>{signupMessage}</div>
-        <form>
+        <form onSubmit={handleSubmit}>
           <TextField
             id="username"
             name="username"
@@ -111,7 +111,7 @@ const Login = ({ error, clearErrorMessage, loading, login, location }) => {
           />
           <Button
             className={classes.submitButton}
-            onClick={handleSubmit}
+            type="submit"
             disabled={username.length < 1 || password.length < 8}
           >
             Login
