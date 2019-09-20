@@ -9,7 +9,19 @@ import Spinner from './ui/Spinner';
 const CreateRecipe = ({ error, loading, createRecipe }) => {
   const [recipeSubmitted, setRecipeSubmitted] = useState(false);
 
-  const handleSaveRecipe = (event, recipe) => {
+  const [recipe, setRecipe] = useState({
+    title: '',
+    ingredients: '',
+    instruction: ''
+  });
+
+  const handleChange = ({ target: { name, value } }) => {
+    const updatedRecipe = { ...recipe };
+    updatedRecipe[name] = value;
+    setRecipe(updatedRecipe);
+  };
+
+  const handleSaveRecipe = event => {
     event.preventDefault();
     createRecipe(recipe);
     setRecipeSubmitted(true);
@@ -26,7 +38,13 @@ const CreateRecipe = ({ error, loading, createRecipe }) => {
   } else if (error) {
     pageContent = <div>{error}</div>;
   } else {
-    pageContent = <RecipeForm handleSubmit={handleSaveRecipe} />;
+    pageContent = (
+      <RecipeForm
+        recipe={recipe}
+        handleSubmit={handleSaveRecipe}
+        handleChange={handleChange}
+      />
+    );
   }
 
   return (
