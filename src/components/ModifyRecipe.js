@@ -23,14 +23,27 @@ const UpdateRecipe = ({
 }) => {
   const [recipeSubmitted, setRecipeSubmitted] = useState(false);
 
+  const [modifiedRecipe, setModifiedRecipe] = useState(null);
+
   useEffect(() => {
     getRecipe(recipeId);
     getOwnRecipes();
   }, [getRecipe, getOwnRecipes, recipeId]);
 
-  const handleSaveRecipe = (event, recipe) => {
+  useEffect(() => {
+    setModifiedRecipe(recipe);
+    console.log('useeffect');
+  }, [recipe]);
+
+  const handleChange = ({ target: { name, value } }) => {
+    const updatedRecipe = { ...modifiedRecipe };
+    updatedRecipe[name] = value;
+    setModifiedRecipe(updatedRecipe);
+  };
+
+  const handleSaveRecipe = event => {
     event.preventDefault();
-    updateRecipe(recipe, recipeId);
+    updateRecipe(modifiedRecipe, recipeId);
     setRecipeSubmitted(true);
   };
 
@@ -46,13 +59,17 @@ const UpdateRecipe = ({
 
   let pageContent = null;
 
-  if (recipesLoading || userLoading) {
+  if (recipesLoading || userLoading || !modifiedRecipe) {
     pageContent = <Spinner />;
   } else if (!recipe || !ownRecipes.find(id => id === recipeId)) {
     pageContent = <div>Recipe not found.</div>;
   } else {
     pageContent = (
-      <RecipeForm handleSubmit={handleSaveRecipe} recipe={recipe} />
+      <RecipeForm
+        handleSubmit={handleSaveRecipe}
+        handleChange={handleChange}
+        recipe={modifiedRecipe}
+      />
     );
   }
 

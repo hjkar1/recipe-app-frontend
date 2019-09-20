@@ -7,7 +7,7 @@ import Signup from './components/auth/Signup';
 import Recipes from './components/Recipes';
 import Recipe from './components/Recipe';
 import CreateRecipe from './components/CreateRecipe';
-import UpdateRecipe from './components/UpdateRecipe';
+import ModifyRecipe from './components/ModifyRecipe';
 import OwnRecipes from './components/OwnRecipes';
 import OwnRecipe from './components/OwnRecipe';
 import PageNotFound from './components/ui/PageNotFound';
@@ -23,7 +23,7 @@ const App = () => {
         <ProtectedRoute
           exact
           path="/recipes/:recipeId/modify"
-          component={UpdateRecipe}
+          component={ModifyRecipe}
         />
         <ProtectedRoute exact path="/myrecipes" component={OwnRecipes} />
         <ProtectedRoute
