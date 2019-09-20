@@ -104,7 +104,7 @@ const Signup = ({
       <TopNavBar />
       <div className={classes.formContainer}>
         <h1>Sign up</h1>
-        <form>
+        <form onSubmit={handleSignup}>
           <TextField
             id="username"
             name="username"
@@ -139,7 +139,7 @@ const Signup = ({
           />
           <Button
             className={classes.submitButton}
-            onClick={handleSignup}
+            type="submit"
             disabled={
               username.length < 1 ||
               password.length < 8 ||
