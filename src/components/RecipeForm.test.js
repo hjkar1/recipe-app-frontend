@@ -6,7 +6,7 @@ import RecipeForm from './RecipeForm';
 /* Unit test for RecipeForm component. */
 
 test('enables form submit only if the form contains title and ingredients', () => {
-  const recipe1 = { title: '', ingredients: '', instruction: '' };
+  const recipe1 = { title: '', ingredients: '', instructions: '' };
 
   const recipe2 = {
     title: 'Test title',
