@@ -4,6 +4,10 @@ import { render, wait } from 'integration-test-utils';
 import axios from '../axiosInstance';
 import Recipes from './Recipes';
 
+/*
+  An integration test for fetching and displaying recipes.
+*/
+
 // Axios instance is used to configure API url -> mock axiosInstance (instead of normal axios module).
 jest.mock('../axiosInstance');
 
