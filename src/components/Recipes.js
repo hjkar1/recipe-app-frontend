@@ -23,7 +23,6 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-// Use named export for unconnected component (for unit testing).
 export const Recipes = ({ error, loading, recipes, getRecipes }) => {
   const recipesPerPage = 20;
   const [filterText, setFilterText] = useState('');
