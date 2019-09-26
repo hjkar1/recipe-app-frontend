@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Recipe = ({
+export const Recipe = ({
   error,
   loading,
   recipe,
