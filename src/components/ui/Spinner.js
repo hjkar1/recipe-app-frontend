@@ -9,7 +9,7 @@ const style = {
 
 const Spinner = () => (
   <div style={style}>
-    <CircularProgress size={50} thickness={5} />
+    <CircularProgress size={50} thickness={5} data-testid="spinner" />
   </div>
 );
 
