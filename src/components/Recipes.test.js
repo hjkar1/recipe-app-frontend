@@ -54,7 +54,7 @@ describe('<Recipes />', () => {
   });
 
   test('filters the recipes by search terms', () => {
-    const searchInput = component.container.querySelector('#search');
+    const searchInput = component.getByPlaceholderText('Search');
     fireEvent.change(searchInput, { target: { value: 'filtered' } });
 
     const element1 = component.queryByText('title 1', { exact: false });

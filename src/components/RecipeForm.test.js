@@ -31,14 +31,14 @@ describe('<RecipeForm />', () => {
       instructions: 'Test instructions'
     };
 
-    const component = render(<Wrapper onSubmit={mockSubmit} recipe={recipe} />);
-
-    const titleInput = component.container.querySelector('#title');
-    const ingredientsInput = component.container.querySelector('#ingredients');
-    const instructionsInput = component.container.querySelector(
-      '#instructions'
+    const { getByLabelText, getByRole } = render(
+      <Wrapper onSubmit={mockSubmit} recipe={recipe} />
     );
-    const form = component.container.querySelector('form');
+
+    const titleInput = getByLabelText('Recipe title');
+    const ingredientsInput = getByLabelText('Ingredients');
+    const instructionsInput = getByLabelText('Instructions');
+    const form = getByRole('form');
 
     fireEvent.change(titleInput, { target: { value: 'Test title' } });
     fireEvent.change(ingredientsInput, {
@@ -68,35 +68,17 @@ describe('<RecipeForm />', () => {
       instructions: ''
     };
 
-    const { getByText, rerender } = render(
-      <RecipeForm
-        recipe={recipe1}
-        handleSubmit={jest.fn}
-        handleChange={jest.fn}
-      />
-    );
+    const { getByText, rerender } = render(<RecipeForm recipe={recipe1} />);
 
     const submitButton = getByText('Save');
 
     expect(submitButton).toBeDisabled();
 
-    rerender(
-      <RecipeForm
-        recipe={recipe2}
-        handleSubmit={jest.fn}
-        handleChange={jest.fn}
-      />
-    );
+    rerender(<RecipeForm recipe={recipe2} />);
 
     expect(submitButton).toBeDisabled();
 
-    rerender(
-      <RecipeForm
-        recipe={recipe3}
-        handleSubmit={jest.fn}
-        handleChange={jest.fn}
-      />
-    );
+    rerender(<RecipeForm recipe={recipe3} />);
 
     expect(submitButton).not.toBeDisabled();
   });
