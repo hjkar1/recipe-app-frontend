@@ -1,13 +1,7 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent } from 'unit-test-utils';
 import { Recipes } from './Recipes';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-
-// Use BrowserRouter to prevent errors caused by the usage of NavLink
-// in the tested component outside of its normal context.
-import { BrowserRouter } from 'react-router-dom';
 
 /* Unit tests for Recipes component. */
 
@@ -33,19 +27,10 @@ describe('<Recipes />', () => {
     }
   ];
 
-  // Mock store for a connected child component of the tested component to prevent errors.
-  const mockStore = createStore(() => {});
-
   let component;
 
   beforeEach(() => {
-    component = render(
-      <Provider store={mockStore}>
-        <BrowserRouter>
-          <Recipes recipes={mockRecipes} getRecipes={() => {}} />
-        </BrowserRouter>
-      </Provider>
-    );
+    component = render(<Recipes recipes={mockRecipes} getRecipes={() => {}} />);
   });
 
   test('renders all recipes', () => {

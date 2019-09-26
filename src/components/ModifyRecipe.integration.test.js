@@ -1,6 +1,12 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
-import { render, fireEvent, wait, waitForElement, testStore } from 'test-utils';
+import {
+  render,
+  fireEvent,
+  wait,
+  waitForElement,
+  testStore
+} from 'integration-test-utils';
 import axios from '../axiosInstance';
 import ModifyRecipe from './ModifyRecipe';
 
