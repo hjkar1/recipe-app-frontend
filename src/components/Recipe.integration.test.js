@@ -1,0 +1,32 @@
+import React from 'react';
+import '@testing-library/jest-dom/extend-expect';
+import { render, wait } from 'integration-test-utils';
+import axios from '../axiosInstance';
+import Recipe from './Recipe';
+
+/*
+  An integration test for fetching and displaying recipe.
+*/
+
+// Axios instance is used to configure API url -> mock axiosInstance (instead of normal axios module).
+jest.mock('../axiosInstance');
+
+// Mock recipe id URL parameter.
+const mockId = { params: { recipeId: '0' } };
+
+const mockRecipe = {
+  _id: '0',
+  title: 'Test title',
+  ingredients: 'Test ingredients',
+  instructions: 'Test instructions'
+};
+
+test('fetches and displays recipe', async () => {
+  axios.get.mockResolvedValue({ data: mockRecipe });
+  const { getAllByText } = render(<Recipe match={mockId} />);
+
+  await wait(() => {
+    const elements = getAllByText('test', { exact: false });
+    expect(elements).toHaveLength(3);
+  });
+});
