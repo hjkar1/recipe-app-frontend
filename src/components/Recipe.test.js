@@ -23,6 +23,7 @@ describe('<Recipe />', () => {
     const element = getAllByText('test', { exact: false });
     expect(element).toHaveLength(3);
   });
+
   test('renders spinner if recipe is loading', () => {
     const { getByTestId } = render(
       <Recipe loading={true} getRecipe={() => {}} match={mockId} />
@@ -30,6 +31,7 @@ describe('<Recipe />', () => {
     const element = getByTestId('spinner');
     expect(element).toBeDefined();
   });
+
   test('renders error text if there is an error', () => {
     const { getByText } = render(
       <Recipe error={'error'} getRecipe={() => {}} match={mockId} />
