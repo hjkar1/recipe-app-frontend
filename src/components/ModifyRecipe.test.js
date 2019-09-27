@@ -1,6 +1,6 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
-import { render } from 'unit-test-utils';
+import { render, fireEvent } from 'unit-test-utils';
 import { ModifyRecipe } from './ModifyRecipe';
 
 /* Unit tests for ModifyRecipe component. */
@@ -30,6 +30,36 @@ describe('<ModifyRecipe />', () => {
       />
     );
     const elements = getAllByDisplayValue('test', { exact: false });
+    expect(elements).toHaveLength(3);
+  });
+
+  test('updates the recipe form', () => {
+    const mockUpdate = jest.fn();
+    const { getByLabelText, getByRole, getAllByDisplayValue } = render(
+      <ModifyRecipe
+        recipe={mockRecipe}
+        getRecipe={() => {}}
+        updateRecipe={mockUpdate}
+        getOwnRecipes={() => {}}
+        ownRecipes={mockRecipes}
+        match={mockId}
+      />
+    );
+
+    const titleInput = getByLabelText('Recipe title');
+    const ingredientsInput = getByLabelText('Ingredients');
+    const instructionsInput = getByLabelText('Instructions');
+    const form = getByRole('form');
+
+    fireEvent.change(titleInput, { target: { value: 'Modified title' } });
+    fireEvent.change(ingredientsInput, {
+      target: { value: 'Modified ingredients' }
+    });
+    fireEvent.change(instructionsInput, {
+      target: { value: 'Modified instructions' }
+    });
+
+    const elements = getAllByDisplayValue('modified', { exact: false });
     expect(elements).toHaveLength(3);
   });
 
