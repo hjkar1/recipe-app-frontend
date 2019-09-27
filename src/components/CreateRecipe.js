@@ -7,7 +7,7 @@ import TopNavBar from './ui/TopNavBar';
 import RecipeForm from './RecipeForm';
 import Spinner from './ui/Spinner';
 
-const CreateRecipe = ({ error, loading, createRecipe }) => {
+export const CreateRecipe = ({ error, loading, createRecipe }) => {
   const [recipeSubmitted, setRecipeSubmitted] = useState(false);
 
   const [recipe, setRecipe] = useState({
