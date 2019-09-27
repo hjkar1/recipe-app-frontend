@@ -20,8 +20,8 @@ describe('<Recipe />', () => {
     const { getAllByText } = render(
       <Recipe recipe={mockRecipe} getRecipe={() => {}} match={mockId} />
     );
-    const element = getAllByText('test', { exact: false });
-    expect(element).toHaveLength(3);
+    const elements = getAllByText('test', { exact: false });
+    expect(elements).toHaveLength(3);
   });
 
   test('renders spinner if recipe is loading', () => {
