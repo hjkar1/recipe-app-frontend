@@ -8,11 +8,10 @@ import TopNavBar from './ui/TopNavBar';
 import RecipeForm from './RecipeForm';
 import Spinner from './ui/Spinner';
 
-const ModifyRecipe = ({
+export const ModifyRecipe = ({
   recipesError,
-  recipesLoading,
   userError,
-  userLoading,
+  loading,
   recipe,
   ownRecipes,
   getRecipe,
@@ -47,19 +46,13 @@ const ModifyRecipe = ({
     setRecipeSubmitted(true);
   };
 
-  if (
-    recipeSubmitted &&
-    !recipesError &&
-    !recipesLoading &&
-    !userError &&
-    !userLoading
-  ) {
+  if (recipeSubmitted && !recipesError && !loading && !userError) {
     return <Redirect to="/myrecipes" />;
   }
 
   let pageContent = null;
 
-  if (recipesLoading || userLoading || !modifiedRecipe) {
+  if (loading || !modifiedRecipe) {
     pageContent = <Spinner />;
   } else if (!recipe || !ownRecipes.find(id => id === recipeId)) {
     pageContent = <div>Recipe not found.</div>;
@@ -87,9 +80,8 @@ const ModifyRecipe = ({
 
 ModifyRecipe.propTypes = {
   recipesError: PropTypes.string,
-  recipesLoading: PropTypes.bool,
   userError: PropTypes.string,
-  userLoading: PropTypes.bool,
+  loading: PropTypes.bool,
   recipe: PropTypes.object,
   ownRecipes: PropTypes.array,
   getRecipe: PropTypes.func,
@@ -101,10 +93,9 @@ ModifyRecipe.propTypes = {
 const mapStateToProps = ({ recipes, user }) => {
   return {
     recipesError: recipes.error,
-    recipesLoading: recipes.loading,
+    loading: recipes.loading || user.loading,
     recipe: recipes.recipe,
     userError: user.error,
-    userLoading: user.loading,
     ownRecipes: user.ownRecipes
   };
 };
