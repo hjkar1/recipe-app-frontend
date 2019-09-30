@@ -1,3 +1,5 @@
+// Mock localStorage.
+
 let items = {};
 
 const localStorageMock = {
@@ -5,7 +7,10 @@ const localStorageMock = {
     items[key] = item;
   },
   getItem: key => items[key],
-  clear: (items = {})
+  clear: (items = {}),
+  removeItem: key => {
+    items[key] = null;
+  }
 };
 
 global.localStorage = localStorageMock;
