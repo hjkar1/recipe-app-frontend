@@ -72,4 +72,6 @@ test('creates a new recipe and redirects to onw recipes listing page', async () 
     const redirectPage = getByText('Redirected');
     expect(redirectPage).toBeDefined();
   });
+
+  localStorage.clear();
 });
