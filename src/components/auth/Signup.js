@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Signup = ({
+export const Signup = ({
   error,
   clearErrorMessage,
   loading,
