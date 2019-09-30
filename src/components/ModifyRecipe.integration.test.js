@@ -49,18 +49,19 @@ const RedirectPage = () => <div>Redirected</div>;
 // Mock recipe id URL parameter.
 const mockId = { params: { recipeId: '0' } };
 
-test('updates recipe and redirects to onw recipes listing page', async () => {
-  axios.get.mockImplementation(url => {
-    switch (url) {
-      case 'users/recipes':
-        return Promise.resolve({ data: ['0'] });
-      case 'recipes/0':
-        return Promise.resolve({ data: originalRecipe });
-      default:
-        return Promise.reject(new Error('not found'));
-    }
-  });
-  axios.put.mockResolvedValue({ data: modifiedRecipe });
+axios.get.mockImplementation(url => {
+  switch (url) {
+    case 'users/recipes':
+      return Promise.resolve({ data: ['0'] });
+    case 'recipes/0':
+      return Promise.resolve({ data: originalRecipe });
+    default:
+      return Promise.reject(new Error('not found'));
+  }
+});
+axios.put.mockResolvedValue({ data: modifiedRecipe });
+
+test('updates recipe and redirects to own recipes listing page', async () => {
   const { getByLabelText, getByRole, getAllByDisplayValue, getByText } = render(
     <Switch>
       <Route exact path="/myrecipes" component={RedirectPage} />
@@ -81,6 +82,10 @@ test('updates recipe and redirects to onw recipes listing page', async () => {
     getByLabelText('Instructions'),
     getByRole('form')
   ]);
+
+  const originalElements = getAllByDisplayValue('test', { exact: false });
+
+  expect(originalElements).toHaveLength(3);
 
   fireEvent.change(titleInput, { target: { value: 'Modified title' } });
   fireEvent.change(ingredientsInput, {
@@ -107,4 +112,6 @@ test('updates recipe and redirects to onw recipes listing page', async () => {
     const redirectPage = getByText('Redirected');
     expect(redirectPage).toBeDefined();
   });
+
+  localStorage.clear();
 });
