@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const TopNavBar = ({ children, logout }) => {
+export const TopNavBar = ({ children, logout }) => {
   const [loggingOut, setLoggingOut] = useState(false);
 
   const handleLogout = () => {
