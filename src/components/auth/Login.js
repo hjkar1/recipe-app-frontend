@@ -37,7 +37,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Login = ({ error, clearErrorMessage, loading, login, location }) => {
+export const Login = ({
+  error,
+  clearErrorMessage,
+  loading,
+  login,
+  location
+}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [signupMessage, setSignupMessage] = useState('');
@@ -67,9 +73,10 @@ const Login = ({ error, clearErrorMessage, loading, login, location }) => {
 
   const classes = useStyles();
 
-  const { from } = location.state || { from: { pathname: '/' } };
-
+  // Redirect to the previous page (or home page if the previous page is not available)
+  // if the user is already logged in.
   if (localStorage.getItem('loggedInUser')) {
+    const { from } = location.state || { from: { pathname: '/' } };
     return <Redirect to={from} />;
   }
 
@@ -113,7 +120,7 @@ const Login = ({ error, clearErrorMessage, loading, login, location }) => {
           <Button
             className={classes.submitButton}
             type="submit"
-            disabled={username.length < 1 || password.length < 8}
+            disabled={username.length < 1 || password.length < 1}
           >
             Login
           </Button>
