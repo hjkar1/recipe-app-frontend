@@ -20,9 +20,9 @@ const mockRecipe = {
   ingredients: 'Test ingredients',
   instructions: 'Test instructions'
 };
+axios.get.mockResolvedValue({ data: mockRecipe });
 
 test('fetches and displays recipe', async () => {
-  axios.get.mockResolvedValue({ data: mockRecipe });
   const { getAllByText } = render(<Recipe match={mockId} />);
 
   await wait(() => {
