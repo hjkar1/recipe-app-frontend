@@ -34,12 +34,11 @@ describe('<ModifyRecipe />', () => {
   });
 
   test('updates the recipe form', () => {
-    const mockUpdate = jest.fn();
-    const { getByLabelText, getByRole, getAllByDisplayValue } = render(
+    const { getByLabelText, getAllByDisplayValue } = render(
       <ModifyRecipe
         recipe={mockRecipe}
         getRecipe={() => {}}
-        updateRecipe={mockUpdate}
+        updateRecipe={() => {}}
         getOwnRecipes={() => {}}
         ownRecipes={mockRecipes}
         match={mockId}
@@ -49,7 +48,6 @@ describe('<ModifyRecipe />', () => {
     const titleInput = getByLabelText('Recipe title');
     const ingredientsInput = getByLabelText('Ingredients');
     const instructionsInput = getByLabelText('Instructions');
-    const form = getByRole('form');
 
     fireEvent.change(titleInput, { target: { value: 'Modified title' } });
     fireEvent.change(ingredientsInput, {
