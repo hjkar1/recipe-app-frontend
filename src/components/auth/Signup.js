@@ -72,6 +72,7 @@ export const Signup = ({
 
   const classes = useStyles();
 
+  // Redirect to the home page if the user is already logged in.
   if (localStorage.getItem('user')) {
     return <Redirect to="/" />;
   }
