@@ -5,10 +5,13 @@ import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
-import Spinner from '../ui/Spinner';
-import TopNavBar from '../ui/TopNavBar';
-import { login } from '../../store/actions/users';
-import { clearErrorMessage } from '../../store/actions/users';
+import Spinner from '../../ui/Spinner';
+import TopNavBar from '../../ui/TopNavBar/TopNavBar';
+import {
+  signup,
+  signupClear,
+  clearErrorMessage
+} from '../../../store/actions/users';
 
 const useStyles = makeStyles(theme => ({
   formContainer: {
@@ -30,31 +33,20 @@ const useStyles = makeStyles(theme => ({
   errorMessage: {
     marginTop: theme.spacing(3),
     color: 'red'
-  },
-  signupMessage: {
-    marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(2)
   }
 }));
 
-export const Login = ({
+export const Signup = ({
   error,
   clearErrorMessage,
   loading,
-  login,
-  location
+  signedUp,
+  signup,
+  signupClear
 }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [signupMessage, setSignupMessage] = useState('');
-
-  const params = new URLSearchParams(location.search);
-
-  useEffect(() => {
-    if (params.get('signedup')) {
-      setSignupMessage('Login with your username and password.');
-    }
-  }, [params]);
+  const [passwordConfirm, setPasswordConfirm] = useState('');
 
   useEffect(
     () => {
@@ -66,18 +58,38 @@ export const Login = ({
     []
   );
 
-  const handleSubmit = event => {
+  const handleSignup = event => {
     event.preventDefault();
-    login({ username, password });
+
+    if (
+      username.length > 0 &&
+      password.length > 7 &&
+      password === passwordConfirm
+    ) {
+      signup({ username, password });
+    }
   };
 
   const classes = useStyles();
 
-  // Redirect to the previous page (or home page if the previous page is not available)
-  // if the user is already logged in.
-  if (localStorage.getItem('loggedInUser')) {
-    const { from } = location.state || { from: { pathname: '/' } };
-    return <Redirect to={from} />;
+  // Redirect to the home page if the user is already logged in.
+  if (localStorage.getItem('user')) {
+    return <Redirect to="/" />;
+  }
+
+  // After signing up the user is redirected to the login page.
+  // The signup flag is cleared from the state so that
+  // the signup page may be accessed again.
+  if (signedUp) {
+    signupClear();
+    return (
+      <Redirect
+        to={{
+          pathname: '/login',
+          search: '?signedup=true'
+        }}
+      />
+    );
   }
 
   if (loading) {
@@ -93,9 +105,8 @@ export const Login = ({
     <Fragment>
       <TopNavBar />
       <div className={classes.formContainer}>
-        <h1>Login</h1>
-        <div className={classes.signupMessage}>{signupMessage}</div>
-        <form onSubmit={handleSubmit}>
+        <h1>Sign up</h1>
+        <form onSubmit={handleSignup}>
           <TextField
             id="username"
             name="username"
@@ -117,12 +128,27 @@ export const Login = ({
             className={classes.textField}
             type="password"
           />
+          <TextField
+            id="passwordConfirm"
+            name="passwordConfirm"
+            label="Retype password"
+            variant="outlined"
+            fullWidth
+            value={passwordConfirm}
+            onChange={({ target }) => setPasswordConfirm(target.value)}
+            className={classes.textField}
+            type="password"
+          />
           <Button
             className={classes.submitButton}
             type="submit"
-            disabled={username.length < 1 || password.length < 1}
+            disabled={
+              username.length < 1 ||
+              password.length < 8 ||
+              passwordConfirm !== password
+            }
           >
-            Login
+            Signup
           </Button>
         </form>
         <div className={classes.errorMessage}>{error}</div>
@@ -131,22 +157,24 @@ export const Login = ({
   );
 };
 
-Login.propTypes = {
+Signup.propTypes = {
   error: PropTypes.string,
   clearErrorMessage: PropTypes.func,
   loading: PropTypes.bool,
-  login: PropTypes.func,
-  location: PropTypes.object
+  signedUp: PropTypes.bool,
+  signup: PropTypes.func,
+  signupClear: PropTypes.func
 };
 
-const mapStateToProps = ({ user: { error, loading } }) => {
+const mapStateToProps = ({ user: { error, signedUp, loading } }) => {
   return {
     error,
+    signedUp,
     loading
   };
 };
 
 export default connect(
   mapStateToProps,
-  { login, clearErrorMessage }
-)(Login);
+  { signup, signupClear, clearErrorMessage }
+)(Signup);

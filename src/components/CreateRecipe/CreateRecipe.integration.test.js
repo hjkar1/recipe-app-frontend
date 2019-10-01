@@ -1,7 +1,7 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 import { render, fireEvent, wait, testStore } from 'integration-test-utils';
-import axios from '../axiosInstance';
+import axios from '../../axiosInstance';
 import CreateRecipe from './CreateRecipe';
 
 // Use routing to test redirect after submit.
@@ -12,7 +12,7 @@ import { Route, Switch } from 'react-router-dom';
 */
 
 // Axios instance is used to configure API url -> mock axiosInstance (instead of normal axios module).
-jest.mock('../axiosInstance');
+jest.mock('../../axiosInstance');
 
 const createdRecipe = {
   _id: '0',

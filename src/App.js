@@ -2,14 +2,14 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import ProtectedRoute from './ProtectedRoute';
-import Login from './components/auth/Login';
-import Signup from './components/auth/Signup';
-import Recipes from './components/Recipes';
-import Recipe from './components/Recipe';
-import CreateRecipe from './components/CreateRecipe';
-import ModifyRecipe from './components/ModifyRecipe';
-import OwnRecipes from './components/OwnRecipes';
-import OwnRecipe from './components/OwnRecipe';
+import Login from './components/auth/Login/Login';
+import Signup from './components/auth/Signup/Signup';
+import Recipes from './components/Recipes/Recipes';
+import Recipe from './components/Recipe/Recipe';
+import CreateRecipe from './components/CreateRecipe/CreateRecipe';
+import ModifyRecipe from './components/ModifyRecipe/ModifyRecipe';
+import OwnRecipes from './components/OwnRecipes/OwnRecipes';
+import OwnRecipe from './components/OwnRecipe/OwnRecipe';
 import PageNotFound from './components/ui/PageNotFound';
 
 const App = () => {

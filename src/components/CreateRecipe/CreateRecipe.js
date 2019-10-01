@@ -2,10 +2,10 @@ import React, { Fragment, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { createRecipe } from '../store/actions/recipes';
-import TopNavBar from './ui/TopNavBar';
-import RecipeForm from './RecipeForm';
-import Spinner from './ui/Spinner';
+import { createRecipe } from '../../store/actions/recipes';
+import TopNavBar from '../ui/TopNavBar/TopNavBar';
+import RecipeForm from '../RecipeForm/RecipeForm';
+import Spinner from '../ui/Spinner';
 
 export const CreateRecipe = ({ error, loading, createRecipe }) => {
   const [recipeSubmitted, setRecipeSubmitted] = useState(false);

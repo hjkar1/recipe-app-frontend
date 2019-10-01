@@ -5,10 +5,10 @@ import Link from '@material-ui/core/Link';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
-import { getRecipes } from '../store/actions/recipes';
-import TopNavBar from './ui/TopNavBar';
-import SearchBar from './ui/SearchBar';
-import Spinner from './ui/Spinner';
+import { getRecipes } from '../../store/actions/recipes';
+import TopNavBar from '../ui/TopNavBar/TopNavBar';
+import SearchBar from '../ui/SearchBar';
+import Spinner from '../ui/Spinner';
 
 const useStyles = makeStyles(theme => ({
   container: {

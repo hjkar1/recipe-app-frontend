@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import TopNavBar from './TopNavBar';
+import TopNavBar from './TopNavBar/TopNavBar';
 
 const PageNotFound = () => (
   <Fragment>

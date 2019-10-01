@@ -2,9 +2,9 @@ import React, { Fragment, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getRecipe } from '../store/actions/recipes';
-import TopNavBar from './ui/TopNavBar';
-import Spinner from './ui/Spinner';
+import { getRecipe } from '../../store/actions/recipes';
+import TopNavBar from '../ui/TopNavBar/TopNavBar';
+import Spinner from '../ui/Spinner';
 
 const useStyles = makeStyles(theme => ({
   container: {

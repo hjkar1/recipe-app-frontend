@@ -8,10 +8,10 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { deleteRecipe } from '../store/actions/recipes';
-import { getOwnRecipes } from '../store/actions/users';
-import Recipe from './Recipe';
-import TopNavBar from './ui/TopNavBar';
+import { deleteRecipe } from '../../store/actions/recipes';
+import { getOwnRecipes } from '../../store/actions/users';
+import Recipe from '../Recipe/Recipe';
+import TopNavBar from '../ui/TopNavBar/TopNavBar';
 
 // This component is used for adding update link and delete button to a recipe component
 const OwnRecipe = ({

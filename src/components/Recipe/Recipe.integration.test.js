@@ -1,7 +1,7 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 import { render, wait } from 'integration-test-utils';
-import axios from '../axiosInstance';
+import axios from '../../axiosInstance';
 import Recipe from './Recipe';
 
 /*
@@ -9,7 +9,7 @@ import Recipe from './Recipe';
 */
 
 // Axios instance is used to configure API url -> mock axiosInstance (instead of normal axios module).
-jest.mock('../axiosInstance');
+jest.mock('../../axiosInstance');
 
 // Mock recipe id URL parameter.
 const mockId = { params: { recipeId: '0' } };

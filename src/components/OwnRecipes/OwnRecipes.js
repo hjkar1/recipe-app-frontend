@@ -4,10 +4,10 @@ import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getRecipes } from '../store/actions/recipes';
-import { getOwnRecipes } from '../store/actions/users';
-import TopNavBar from './ui/TopNavBar';
-import Spinner from './ui/Spinner';
+import { getRecipes } from '../../store/actions/recipes';
+import { getOwnRecipes } from '../../store/actions/users';
+import TopNavBar from '../ui/TopNavBar/TopNavBar';
+import Spinner from '../ui/Spinner';
 
 const useStyles = makeStyles(theme => ({
   container: {

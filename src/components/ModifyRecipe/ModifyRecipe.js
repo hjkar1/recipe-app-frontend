@@ -2,11 +2,11 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getRecipe, updateRecipe } from '../store/actions/recipes';
-import { getOwnRecipes } from '../store/actions/users';
-import TopNavBar from './ui/TopNavBar';
-import RecipeForm from './RecipeForm';
-import Spinner from './ui/Spinner';
+import { getRecipe, updateRecipe } from '../../store/actions/recipes';
+import { getOwnRecipes } from '../../store/actions/users';
+import TopNavBar from '../ui/TopNavBar/TopNavBar';
+import RecipeForm from '../RecipeForm/RecipeForm';
+import Spinner from '../ui/Spinner';
 
 export const ModifyRecipe = ({
   recipesError,
