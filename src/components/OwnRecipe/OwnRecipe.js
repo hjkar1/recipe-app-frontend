@@ -13,18 +13,16 @@ import { getOwnRecipes } from '../../store/actions/users';
 import Recipe from '../Recipe/Recipe';
 import TopNavBar from '../ui/TopNavBar/TopNavBar';
 
-// This component is used for adding update link and delete button to a recipe component
-const OwnRecipe = ({
+// This component is used for adding update link and delete button to a recipe component.
+export const OwnRecipe = ({
   deleteRecipe,
   getOwnRecipes,
   recipesError,
-  recipesLoading,
   userError,
-  userLoading,
+  loading,
   ownRecipes,
   match
 }) => {
-  // This prop needs to be passed to the actual recipe component
   const {
     params: { recipeId }
   } = match;
@@ -74,13 +72,7 @@ const OwnRecipe = ({
     </Dialog>
   );
 
-  if (
-    recipeDeleted &&
-    !recipesError &&
-    !recipesLoading &&
-    !userError &&
-    !userLoading
-  ) {
+  if (recipeDeleted && !recipesError && !userError && !loading) {
     return <Redirect to="/myrecipes" />;
   }
 
@@ -96,13 +88,13 @@ const OwnRecipe = ({
   return (
     <Fragment>
       {dialog}
-      {/* The url params prop (recipeId) is passed to the recipe component */}
+      {/* The url params prop (recipeId) is passed to the recipe component. */}
       <Recipe match={match}>
         <div>
           <Button component={Link} to={`/recipes/${recipeId}/modify`}>
-            Modify
+            Modify recipe
           </Button>
-          <Button onClick={handleDialogOpen}>Delete</Button>
+          <Button onClick={handleDialogOpen}>Delete recipe</Button>
         </div>
         <Fragment>
           <div>{recipesError}</div>
@@ -117,9 +109,8 @@ OwnRecipe.propTypes = {
   deleteRecipe: PropTypes.func,
   getOwnRecipes: PropTypes.func,
   recipesError: PropTypes.string,
-  recipesLoading: PropTypes.bool,
   userError: PropTypes.string,
-  userLoading: PropTypes.bool,
+  loading: PropTypes.bool,
   ownRecipes: PropTypes.array,
   match: PropTypes.object
 };
@@ -127,9 +118,8 @@ OwnRecipe.propTypes = {
 const mapStateToProps = ({ recipes, user }) => {
   return {
     recipesError: recipes.error,
-    recipesLoading: recipes.loading,
+    loading: recipes.loading || user.loading,
     userError: user.error,
-    userLoading: user.loading,
     ownRecipes: user.ownRecipes
   };
 };
