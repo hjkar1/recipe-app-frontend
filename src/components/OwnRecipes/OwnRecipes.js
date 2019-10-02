@@ -19,11 +19,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const OwnRecipes = ({
+export const OwnRecipes = ({
   recipesError,
-  recipesLoading,
   userError,
-  userLoading,
+  loading,
   recipes,
   ownRecipes,
   getRecipes,
@@ -38,7 +37,7 @@ const OwnRecipes = ({
 
   let pageContent = null;
 
-  if (recipesLoading || userLoading) {
+  if (loading) {
     pageContent = <Spinner />;
   } else if (recipesError || userError) {
     pageContent = (
@@ -78,9 +77,8 @@ const OwnRecipes = ({
 
 OwnRecipes.propTypes = {
   recipesError: PropTypes.string,
-  recipesLoading: PropTypes.bool,
   userError: PropTypes.string,
-  userLoading: PropTypes.bool,
+  loading: PropTypes.bool,
   recipes: PropTypes.array,
   ownRecipes: PropTypes.array,
   getRecipes: PropTypes.func,
@@ -90,11 +88,10 @@ OwnRecipes.propTypes = {
 const mapStateToProps = ({ recipes, user }) => {
   return {
     recipesError: recipes.error,
-    recipesLoading: recipes.loading,
     recipes: recipes.recipes,
     userError: user.error,
-    userLoading: user.loading,
-    ownRecipes: user.ownRecipes
+    ownRecipes: user.ownRecipes,
+    loading: user.loading || recipes.loading
   };
 };
 
