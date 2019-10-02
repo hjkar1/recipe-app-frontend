@@ -113,5 +113,6 @@ test('updates recipe and redirects to own recipes listing page', async () => {
     expect(redirectPage).toBeDefined();
   });
 
+  // Clear logged in user data from mock localstorage.
   localStorage.clear();
 });

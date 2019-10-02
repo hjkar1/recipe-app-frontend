@@ -42,5 +42,6 @@ test('logs the user out and redirects after logout', async () => {
     expect(redirectPage).toBeDefined();
   });
 
+  // Clear logged in user data from mock localstorage.
   localStorage.clear();
 });

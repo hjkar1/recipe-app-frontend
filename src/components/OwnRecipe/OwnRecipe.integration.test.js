@@ -75,6 +75,7 @@ test('opens delete dialog and redirects after delete', async () => {
     expect(redirectPage).toBeDefined();
   });
 
+  // Clear logged in user data from mock localstorage.
   localStorage.clear();
 });
 
@@ -99,5 +100,6 @@ test('redirects to recipe modify page', async () => {
     expect(redirectPage).toBeDefined();
   });
 
+  // Clear logged in user data from mock localstorage.
   localStorage.clear();
 });

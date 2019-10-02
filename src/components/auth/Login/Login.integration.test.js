@@ -58,6 +58,8 @@ test('logs in the user and redirects to the previous page', async () => {
     const redirectPage = getByText('Redirected');
     expect(redirectPage).toBeDefined();
   });
+
+  // Clear login user data from mock localstorage.
   localStorage.clear();
 });
 

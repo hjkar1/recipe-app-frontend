@@ -5,34 +5,46 @@ import { Signup } from './Signup';
 
 /* Unit tests for Signup component. */
 
-describe('<Signup />', () => {
-  test('updates the signup form', () => {
-    const { getByLabelText, getByDisplayValue, getAllByDisplayValue } = render(
-      <Signup />
-    );
-    const usernameInput = getByLabelText('Username');
-    const passwordInput = getByLabelText('Password');
-    const passwordConfirmInput = getByLabelText('Retype password');
+test('updates the signup form', () => {
+  const { getByLabelText, getByDisplayValue, getAllByDisplayValue } = render(
+    <Signup />
+  );
+  const usernameInput = getByLabelText('Username');
+  const passwordInput = getByLabelText('Password');
+  const passwordConfirmInput = getByLabelText('Retype password');
 
-    fireEvent.change(usernameInput, { target: { value: 'username' } });
-    fireEvent.change(passwordInput, { target: { value: 'password' } });
-    fireEvent.change(passwordConfirmInput, { target: { value: 'password' } });
+  fireEvent.change(usernameInput, { target: { value: 'username' } });
+  fireEvent.change(passwordInput, { target: { value: 'password' } });
+  fireEvent.change(passwordConfirmInput, { target: { value: 'password' } });
 
-    const username = getByDisplayValue('username');
-    const passwords = getAllByDisplayValue('password');
+  const username = getByDisplayValue('username');
+  const passwords = getAllByDisplayValue('password');
 
-    expect(username).toBeDefined();
-    expect(passwords).toHaveLength(2);
+  expect(username).toBeDefined();
+  expect(passwords).toHaveLength(2);
+});
+
+test('renders a spinner if loading is in progress', () => {
+  const { getByTestId } = render(<Signup loading={true} />);
+
+  const element = getByTestId('spinner');
+
+  expect(element).toBeDefined();
+});
+
+describe('test submit button', () => {
+  let usernameInput, passwordInput, passwordConfirmInput, loginButton;
+
+  beforeEach(() => {
+    const { getByRole, getByLabelText } = render(<Signup />);
+
+    usernameInput = getByLabelText('Username');
+    passwordInput = getByLabelText('Password');
+    passwordConfirmInput = getByLabelText('Retype password');
+    loginButton = getByRole('button');
   });
 
   test('disables submit button if any required inputs are missing', () => {
-    const { getByRole, getByLabelText } = render(<Signup />);
-
-    const usernameInput = getByLabelText('Username');
-    const passwordInput = getByLabelText('Password');
-    const passwordConfirmInput = getByLabelText('Retype password');
-    const loginButton = getByRole('button');
-
     expect(loginButton).toBeDisabled();
 
     fireEvent.change(usernameInput, { target: { value: 'username' } });
@@ -49,13 +61,6 @@ describe('<Signup />', () => {
   });
 
   test('disables submit button if password is inadequate', () => {
-    const { getByRole, getByLabelText } = render(<Signup />);
-
-    const usernameInput = getByLabelText('Username');
-    const passwordInput = getByLabelText('Password');
-    const passwordConfirmInput = getByLabelText('Retype password');
-    const loginButton = getByRole('button');
-
     fireEvent.change(usernameInput, { target: { value: 'username' } });
     fireEvent.change(passwordInput, { target: { value: 'passwor' } });
     fireEvent.change(passwordConfirmInput, { target: { value: 'passwor' } });
@@ -64,25 +69,10 @@ describe('<Signup />', () => {
   });
 
   test('disables submit button if the two password inputs do not match', () => {
-    const { getByRole, getByLabelText } = render(<Signup />);
-
-    const usernameInput = getByLabelText('Username');
-    const passwordInput = getByLabelText('Password');
-    const passwordConfirmInput = getByLabelText('Retype password');
-    const loginButton = getByRole('button');
-
     fireEvent.change(usernameInput, { target: { value: 'username' } });
     fireEvent.change(passwordInput, { target: { value: 'password' } });
     fireEvent.change(passwordConfirmInput, { target: { value: 'passwodr' } });
 
     expect(loginButton).toBeDisabled();
-  });
-
-  test('renders a spinner if loading is in progress', () => {
-    const { getByTestId } = render(<Signup loading={true} />);
-
-    const element = getByTestId('spinner');
-
-    expect(element).toBeDefined();
   });
 });

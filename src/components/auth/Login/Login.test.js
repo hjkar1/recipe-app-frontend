@@ -5,83 +5,71 @@ import { Login } from './Login';
 
 /* Unit tests for Login component. */
 
-describe('<Login />', () => {
-  test('updates the login form', () => {
-    // Mock location object.
-    const mockLocation = {
-      search: ''
-    };
+// Mock location object without URL search params.
+const mockLocation = {
+  search: ''
+};
 
-    const { getByLabelText, getByDisplayValue } = render(
-      <Login location={mockLocation} />
-    );
-    const usernameInput = getByLabelText('Username');
-    const passwordInput = getByLabelText('Password');
+test('updates the login form', () => {
+  const { getByLabelText, getByDisplayValue } = render(
+    <Login location={mockLocation} />
+  );
+  const usernameInput = getByLabelText('Username');
+  const passwordInput = getByLabelText('Password');
 
-    fireEvent.change(usernameInput, { target: { value: 'username' } });
-    fireEvent.change(passwordInput, { target: { value: 'password' } });
+  fireEvent.change(usernameInput, { target: { value: 'username' } });
+  fireEvent.change(passwordInput, { target: { value: 'password' } });
 
-    const username = getByDisplayValue('username');
-    const password = getByDisplayValue('password');
+  const username = getByDisplayValue('username');
+  const password = getByDisplayValue('password');
 
-    expect(username).toBeDefined();
-    expect(password).toBeDefined();
-  });
+  expect(username).toBeDefined();
+  expect(password).toBeDefined();
+});
 
-  test('renders login message after signup', () => {
-    // Mock location object.
-    const mockLocation = {
-      search: '?signedup=true'
-    };
+test('renders login message after signup', () => {
+  // Mock location object with URL search params.
+  const mockLocationWithSearch = {
+    search: '?signedup=true'
+  };
 
-    const { getByText } = render(<Login location={mockLocation} />);
+  const { getByText } = render(<Login location={mockLocationWithSearch} />);
 
-    const element = getByText('Login with your username and password.');
+  const element = getByText('Login with your username and password.');
 
-    expect(element).toBeDefined();
-  });
+  expect(element).toBeDefined();
+});
 
-  test('disables submit button if username and password are not entered correctly', () => {
-    // Mock location object.
-    const mockLocation = {
-      search: ''
-    };
+test('disables submit button if username and password are not entered correctly', () => {
+  const { getByRole, getByLabelText } = render(
+    <Login location={mockLocation} />
+  );
 
-    const { getByRole, getByLabelText } = render(
-      <Login location={mockLocation} />
-    );
+  const usernameInput = getByLabelText('Username');
+  const passwordInput = getByLabelText('Password');
+  const loginButton = getByRole('button');
 
-    const usernameInput = getByLabelText('Username');
-    const passwordInput = getByLabelText('Password');
-    const loginButton = getByRole('button');
+  expect(loginButton).toBeDisabled();
 
-    expect(loginButton).toBeDisabled();
+  fireEvent.change(usernameInput, { target: { value: 'username' } });
 
-    fireEvent.change(usernameInput, { target: { value: 'username' } });
+  expect(loginButton).toBeDisabled();
 
-    expect(loginButton).toBeDisabled();
+  fireEvent.change(passwordInput, { target: { value: 'password' } });
 
-    fireEvent.change(passwordInput, { target: { value: 'password' } });
+  expect(loginButton).not.toBeDisabled();
 
-    expect(loginButton).not.toBeDisabled();
+  fireEvent.change(usernameInput, { target: { value: '' } });
 
-    fireEvent.change(usernameInput, { target: { value: '' } });
+  expect(loginButton).toBeDisabled();
+});
 
-    expect(loginButton).toBeDisabled();
-  });
+test('renders a spinner if loading is in progress', () => {
+  const { getByTestId } = render(
+    <Login location={mockLocation} loading={true} />
+  );
 
-  test('renders a spinner if loading is in progress', () => {
-    // Mock location object.
-    const mockLocation = {
-      search: ''
-    };
+  const element = getByTestId('spinner');
 
-    const { getByTestId } = render(
-      <Login location={mockLocation} loading={true} />
-    );
-
-    const element = getByTestId('spinner');
-
-    expect(element).toBeDefined();
-  });
+  expect(element).toBeDefined();
 });

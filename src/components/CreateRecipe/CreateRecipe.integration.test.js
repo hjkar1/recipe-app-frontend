@@ -73,5 +73,6 @@ test('creates a new recipe and redirects to onw recipes listing page', async () 
     expect(redirectPage).toBeDefined();
   });
 
+  // Clear logged in user data from mock localstorage.
   localStorage.clear();
 });
