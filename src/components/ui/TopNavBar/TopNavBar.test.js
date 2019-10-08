@@ -1,6 +1,6 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
-import { render } from 'unit-test-utils';
+import { render } from 'utils/unit-test-utils';
 import { TopNavBar } from './TopNavBar';
 
 // Use routing to test redirect after logout.

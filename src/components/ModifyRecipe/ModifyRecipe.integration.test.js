@@ -6,8 +6,8 @@ import {
   wait,
   waitForElement,
   testStore
-} from 'integration-test-utils';
-import axios from '../../axiosInstance';
+} from 'utils/integration-test-utils';
+import axios from 'axiosInstance';
 import ModifyRecipe from './ModifyRecipe';
 
 // Use routing to test redirect after submit.
@@ -18,7 +18,7 @@ import { Route, Switch } from 'react-router-dom';
 */
 
 // Axios instance is used to configure API url -> mock axiosInstance (instead of normal axios module).
-jest.mock('../../axiosInstance');
+jest.mock('axiosInstance');
 
 const originalRecipe = {
   _id: '0',

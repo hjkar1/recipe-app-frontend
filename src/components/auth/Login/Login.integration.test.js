@@ -1,7 +1,12 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
-import { render, fireEvent, wait, testStore } from 'integration-test-utils';
-import axios from '../../../axiosInstance';
+import {
+  render,
+  fireEvent,
+  wait,
+  testStore
+} from 'utils/integration-test-utils';
+import axios from 'axiosInstance';
 import Login from './Login';
 
 // Use routing to test redirect after login.
@@ -12,7 +17,7 @@ import { Route, Switch } from 'react-router-dom';
 */
 
 // Axios instance is used to configure API url -> mock axiosInstance (instead of normal axios module).
-jest.mock('../../../axiosInstance');
+jest.mock('axiosInstance');
 
 // Mock component for redirect page.
 const RedirectPage = () => <div>Redirected</div>;

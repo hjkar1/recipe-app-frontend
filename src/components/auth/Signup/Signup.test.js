@@ -1,6 +1,6 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
-import { render, fireEvent } from 'unit-test-utils';
+import { render, fireEvent } from 'utils/unit-test-utils';
 import { Signup } from './Signup';
 
 /* Unit tests for Signup component. */
