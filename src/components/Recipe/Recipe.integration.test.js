@@ -1,5 +1,4 @@
 import React from 'react';
-import '@testing-library/jest-dom/extend-expect';
 import { render, wait } from 'utils/integration-test-utils';
 import axios from 'axiosInstance';
 import Recipe from './Recipe';

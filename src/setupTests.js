@@ -1,3 +1,5 @@
+import '@testing-library/jest-dom/extend-expect';
+
 // Mock localStorage.
 
 let items = {};
