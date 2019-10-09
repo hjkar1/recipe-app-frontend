@@ -106,13 +106,13 @@ export const OwnRecipe = ({
 };
 
 OwnRecipe.propTypes = {
-  deleteRecipe: PropTypes.func,
-  getOwnRecipes: PropTypes.func,
+  deleteRecipe: PropTypes.func.isRequired,
+  getOwnRecipes: PropTypes.func.isRequired,
   recipesError: PropTypes.string,
   userError: PropTypes.string,
   loading: PropTypes.bool,
   ownRecipes: PropTypes.array,
-  match: PropTypes.object
+  match: PropTypes.object.isRequired
 };
 
 const mapStateToProps = ({ recipes, user }) => {

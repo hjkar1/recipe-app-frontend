@@ -134,7 +134,7 @@ export const TopNavBar = ({ children, logout }) => {
 
 TopNavBar.propTypes = {
   children: PropTypes.node,
-  logout: PropTypes.func
+  logout: PropTypes.func.isRequired
 };
 
 export default connect(

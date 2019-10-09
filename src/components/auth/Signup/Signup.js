@@ -159,11 +159,11 @@ export const Signup = ({
 
 Signup.propTypes = {
   error: PropTypes.string,
-  clearErrorMessage: PropTypes.func,
+  clearErrorMessage: PropTypes.func.isRequired,
   loading: PropTypes.bool,
   signedUp: PropTypes.bool,
-  signup: PropTypes.func,
-  signupClear: PropTypes.func
+  signup: PropTypes.func.isRequired,
+  signupClear: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({ user: { error, signedUp, loading } }) => {

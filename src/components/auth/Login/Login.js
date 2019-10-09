@@ -133,9 +133,9 @@ export const Login = ({
 
 Login.propTypes = {
   error: PropTypes.string,
-  clearErrorMessage: PropTypes.func,
+  clearErrorMessage: PropTypes.func.isRequired,
   loading: PropTypes.bool,
-  login: PropTypes.func,
+  login: PropTypes.func.isRequired,
   location: PropTypes.object
 };
 

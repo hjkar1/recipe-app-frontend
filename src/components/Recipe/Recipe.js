@@ -64,9 +64,9 @@ Recipe.propTypes = {
   error: PropTypes.string,
   loading: PropTypes.bool,
   recipe: PropTypes.object,
-  getRecipe: PropTypes.func,
+  getRecipe: PropTypes.func.isRequired,
   children: PropTypes.node,
-  recipeId: PropTypes.string
+  match: PropTypes.object.isRequired
 };
 
 const mapStateToProps = ({ recipes: { error, loading, recipe } }) => {

@@ -84,10 +84,10 @@ ModifyRecipe.propTypes = {
   loading: PropTypes.bool,
   recipe: PropTypes.object,
   ownRecipes: PropTypes.array,
-  getRecipe: PropTypes.func,
-  updateRecipe: PropTypes.func,
-  getOwnRecipes: PropTypes.func,
-  recipeId: PropTypes.string
+  getRecipe: PropTypes.func.isRequired,
+  updateRecipe: PropTypes.func.isRequired,
+  getOwnRecipes: PropTypes.func.isRequired,
+  match: PropTypes.object.isRequired
 };
 
 const mapStateToProps = ({ recipes, user }) => {

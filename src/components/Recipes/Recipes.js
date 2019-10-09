@@ -136,7 +136,7 @@ Recipes.propTypes = {
   error: PropTypes.string,
   loading: PropTypes.bool,
   recipes: PropTypes.array,
-  getRecipes: PropTypes.func
+  getRecipes: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({ recipes: { error, loading, recipes } }) => {

@@ -75,8 +75,8 @@ const RecipeForm = ({
 };
 
 RecipeForm.propTypes = {
-  handleSubmit: PropTypes.func,
-  handleChange: PropTypes.func,
+  handleSubmit: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
   title: PropTypes.string,
   instructions: PropTypes.string,
   ingredients: PropTypes.string

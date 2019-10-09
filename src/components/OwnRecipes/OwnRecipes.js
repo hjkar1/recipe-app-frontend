@@ -81,8 +81,8 @@ OwnRecipes.propTypes = {
   loading: PropTypes.bool,
   recipes: PropTypes.array,
   ownRecipes: PropTypes.array,
-  getRecipes: PropTypes.func,
-  getOwnRecipes: PropTypes.func
+  getRecipes: PropTypes.func.isRequired,
+  getOwnRecipes: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({ recipes, user }) => {

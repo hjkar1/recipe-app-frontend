@@ -59,7 +59,7 @@ export const CreateRecipe = ({ error, loading, createRecipe }) => {
 CreateRecipe.propTypes = {
   error: PropTypes.string,
   loading: PropTypes.bool,
-  createRecipe: PropTypes.func
+  createRecipe: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({ recipes: { error, loading } }) => {
