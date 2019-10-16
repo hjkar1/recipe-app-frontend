@@ -11,6 +11,7 @@ test('renders notification if recipe is not found in the own recipes list', () =
   const { getByText } = render(
     <OwnRecipe
       getOwnRecipes={() => {}}
+      deleteRecipe={() => {}}
       ownRecipes={['1', '2', '3']}
       match={mockId}
     />

@@ -5,7 +5,9 @@ import { CreateRecipe } from './CreateRecipe';
 /* Unit tests for CreateRecipe component. */
 
 test('updates the recipe form', () => {
-  const { getByLabelText, getAllByDisplayValue } = render(<CreateRecipe />);
+  const { getByLabelText, getAllByDisplayValue } = render(
+    <CreateRecipe createRecipe={() => {}} />
+  );
 
   const titleInput = getByLabelText('Recipe title');
   const ingredientsInput = getByLabelText('Ingredients');
@@ -24,13 +26,17 @@ test('updates the recipe form', () => {
 });
 
 test('renders spinner if loading not completed', () => {
-  const { getByTestId } = render(<CreateRecipe loading={true} />);
+  const { getByTestId } = render(
+    <CreateRecipe createRecipe={() => {}} loading={true} />
+  );
   const element = getByTestId('spinner');
   expect(element).toBeDefined();
 });
 
 test('renders error text if there is an error', () => {
-  const { getByText } = render(<CreateRecipe error={'error'} />);
+  const { getByText } = render(
+    <CreateRecipe createRecipe={() => {}} error={'error'} />
+  );
   const element = getByText('error');
   expect(element).toBeDefined();
 });

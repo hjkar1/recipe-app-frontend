@@ -66,17 +66,35 @@ test('enables form submit only if the form contains title and ingredients', () =
     instructions: ''
   };
 
-  const { getByText, rerender } = render(<RecipeForm recipe={recipe1} />);
+  const { getByText, rerender } = render(
+    <RecipeForm
+      recipe={recipe1}
+      handleSubmit={() => {}}
+      handleChange={() => {}}
+    />
+  );
 
   const submitButton = getByText('Save');
 
   expect(submitButton).toBeDisabled();
 
-  rerender(<RecipeForm recipe={recipe2} />);
+  rerender(
+    <RecipeForm
+      recipe={recipe2}
+      handleSubmit={() => {}}
+      handleChange={() => {}}
+    />
+  );
 
   expect(submitButton).toBeDisabled();
 
-  rerender(<RecipeForm recipe={recipe3} />);
+  rerender(
+    <RecipeForm
+      recipe={recipe3}
+      handleSubmit={() => {}}
+      handleChange={() => {}}
+    />
+  );
 
   expect(submitButton).not.toBeDisabled();
 });

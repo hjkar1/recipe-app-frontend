@@ -11,7 +11,11 @@ const mockLocation = {
 
 test('updates the login form', () => {
   const { getByLabelText, getByDisplayValue } = render(
-    <Login location={mockLocation} />
+    <Login
+      location={mockLocation}
+      login={() => {}}
+      clearErrorMessage={() => {}}
+    />
   );
   const usernameInput = getByLabelText('Username');
   const passwordInput = getByLabelText('Password');
@@ -32,7 +36,13 @@ test('renders login message after signup', () => {
     search: '?signedup=true'
   };
 
-  const { getByText } = render(<Login location={mockLocationWithSearch} />);
+  const { getByText } = render(
+    <Login
+      location={mockLocationWithSearch}
+      login={() => {}}
+      clearErrorMessage={() => {}}
+    />
+  );
 
   const element = getByText('Login with your username and password.');
 
@@ -41,7 +51,11 @@ test('renders login message after signup', () => {
 
 test('disables submit button if username and password are not entered correctly', () => {
   const { getByRole, getByLabelText } = render(
-    <Login location={mockLocation} />
+    <Login
+      location={mockLocation}
+      login={() => {}}
+      clearErrorMessage={() => {}}
+    />
   );
 
   const usernameInput = getByLabelText('Username');
@@ -65,7 +79,12 @@ test('disables submit button if username and password are not entered correctly'
 
 test('renders a spinner if loading is in progress', () => {
   const { getByTestId } = render(
-    <Login location={mockLocation} loading={true} />
+    <Login
+      location={mockLocation}
+      loading={true}
+      login={() => {}}
+      clearErrorMessage={() => {}}
+    />
   );
 
   const element = getByTestId('spinner');

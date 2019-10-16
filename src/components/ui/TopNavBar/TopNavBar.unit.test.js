@@ -9,7 +9,7 @@ import { Route, Switch } from 'react-router-dom';
 
 test('renders its children', () => {
   const { getByText } = render(
-    <TopNavBar>
+    <TopNavBar logout={() => {}}>
       <div>Test</div>
     </TopNavBar>
   );
@@ -19,7 +19,7 @@ test('renders its children', () => {
 });
 
 test('renders only links for unregistered user if not logged in', () => {
-  const { getByText, queryByText } = render(<TopNavBar />);
+  const { getByText, queryByText } = render(<TopNavBar logout={() => {}} />);
 
   const loginLink = getByText('Login');
   const signupLink = getByText('Signup');
@@ -44,7 +44,7 @@ test('renders links for logged in user if user has logged in', () => {
 
   localStorage.setItem('loggedInUser', JSON.stringify(user));
 
-  const { getByText, queryByText } = render(<TopNavBar />);
+  const { getByText, queryByText } = render(<TopNavBar logout={() => {}} />);
 
   const loginLink = queryByText('Login');
   const signupLink = queryByText('Signup');

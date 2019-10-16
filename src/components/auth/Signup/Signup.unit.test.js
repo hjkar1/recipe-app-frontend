@@ -6,7 +6,11 @@ import { Signup } from './Signup';
 
 test('updates the signup form', () => {
   const { getByLabelText, getByDisplayValue, getAllByDisplayValue } = render(
-    <Signup />
+    <Signup
+      signup={() => {}}
+      signupClear={() => {}}
+      clearErrorMessage={() => {}}
+    />
   );
   const usernameInput = getByLabelText('Username');
   const passwordInput = getByLabelText('Password');
@@ -24,7 +28,14 @@ test('updates the signup form', () => {
 });
 
 test('renders a spinner if loading is in progress', () => {
-  const { getByTestId } = render(<Signup loading={true} />);
+  const { getByTestId } = render(
+    <Signup
+      loading={true}
+      signup={() => {}}
+      signupClear={() => {}}
+      clearErrorMessage={() => {}}
+    />
+  );
 
   const element = getByTestId('spinner');
 
@@ -35,7 +46,13 @@ describe('test submit button', () => {
   let usernameInput, passwordInput, passwordConfirmInput, loginButton;
 
   beforeEach(() => {
-    const { getByRole, getByLabelText } = render(<Signup />);
+    const { getByRole, getByLabelText } = render(
+      <Signup
+        signup={() => {}}
+        signupClear={() => {}}
+        clearErrorMessage={() => {}}
+      />
+    );
 
     usernameInput = getByLabelText('Username');
     passwordInput = getByLabelText('Password');
