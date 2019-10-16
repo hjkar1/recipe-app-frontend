@@ -41,7 +41,7 @@ export const getRecipes = () => async dispatch => {
     const result = await axios.get('recipes');
     dispatch(getRecipesSuccess(result.data));
   } catch (error) {
-    dispatch(getRecipesFail('Something went wrong.'));
+    dispatch(getRecipesFail('Recipes not found.'));
   }
 };
 
@@ -67,7 +67,7 @@ export const getRecipe = recipeId => async dispatch => {
     const result = await axios.get(`recipes/${recipeId}`);
     dispatch(getRecipeSuccess(result.data));
   } catch (error) {
-    dispatch(getRecipeFail('Something went wrong.'));
+    dispatch(getRecipeFail('Recipe not found.'));
   }
 };
 
