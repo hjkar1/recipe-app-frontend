@@ -37,9 +37,7 @@ export const Recipe = ({
     pageContent = <Spinner />;
   } else if (error) {
     pageContent = <div>{error}</div>;
-  } else if (!recipe) {
-    pageContent = <div>Recipe not found.</div>;
-  } else {
+  } else if (recipe) {
     pageContent = (
       <Fragment>
         <div className={classes.container}>
