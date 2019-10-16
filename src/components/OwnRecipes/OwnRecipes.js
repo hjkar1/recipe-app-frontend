@@ -50,9 +50,7 @@ export const OwnRecipes = ({
     pageContent = (
       <div className={classes.container}>
         {recipes
-          .filter(recipe =>
-            ownRecipes.find(ownRecipeId => recipe._id === ownRecipeId)
-          )
+          .filter(recipe => ownRecipes.indexOf(recipe._id) > -1)
           .map(recipe => (
             <Link
               className={classes.recipeLink}
