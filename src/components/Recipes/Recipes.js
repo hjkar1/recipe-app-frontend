@@ -28,7 +28,7 @@ export const Recipes = ({ error, loading, recipes, getRecipes }) => {
   const [filterText, setFilterText] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [moreToShow, setMoreToShow] = useState(true);
+  const [moreToShow, setMoreToShow] = useState(false);
 
   useEffect(() => {
     getRecipes();
@@ -38,6 +38,10 @@ export const Recipes = ({ error, loading, recipes, getRecipes }) => {
     // The displayed recipe list is updated whenever this component receives
     // a new list of recipes.
     setSearchResults(recipes.slice(0, recipesPerPage));
+
+    if (recipes.length > recipesPerPage) {
+      setMoreToShow(true);
+    }
   }, [recipes]);
 
   const classes = useStyles();
