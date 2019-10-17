@@ -1,37 +1,11 @@
 import React from 'react';
 import { render } from 'utils/unit-test-utils';
+import mockRecipes from 'utils/mockRecipes';
 import { OwnRecipes } from './OwnRecipes';
 
 /* Unit tests for OwnRecipes component. */
 
 test('renders only the recipes created by the user', () => {
-  const mockRecipes = [
-    {
-      _id: '1',
-      title: 'Test title 1',
-      ingredients: 'Test ingredients',
-      instructions: 'Test instructions'
-    },
-    {
-      _id: '2',
-      title: 'Test title 2',
-      ingredients: 'Test ingredients',
-      instructions: 'Test instructions'
-    },
-    {
-      _id: '3',
-      title: 'Test title 3',
-      ingredients: 'Test ingredients',
-      instructions: 'Test instructions'
-    },
-    {
-      _id: '4',
-      title: 'Test title 4',
-      ingredients: 'Test ingredients',
-      instructions: 'Test instructions'
-    }
-  ];
-
   const mockOwnRecipes = ['2', '4'];
 
   const { getByText, queryByText } = render(
