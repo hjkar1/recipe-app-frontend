@@ -2,7 +2,7 @@ import * as actionTypes from './actionTypes';
 import axios from '../../axiosInstance';
 import { getAuthHeaderConfig } from './utils';
 
-// Create a new recipe
+// Create a new recipe.
 
 export const createRecipe = recipe => async dispatch => {
   dispatch(createRecipeStart());
@@ -33,7 +33,7 @@ const createRecipeFail = error => ({
   error
 });
 
-// Get all recipes
+// Get all recipes.
 
 export const getRecipes = () => async dispatch => {
   dispatch(getRecipesStart());
@@ -59,7 +59,7 @@ const getRecipesFail = error => ({
   error
 });
 
-// Get a recipe
+// Get a recipe.
 
 export const getRecipe = recipeId => async dispatch => {
   dispatch(getRecipeStart());
@@ -85,7 +85,7 @@ const getRecipeFail = error => ({
   error
 });
 
-// Modify a recipe
+// Modify a recipe.
 
 export const updateRecipe = (recipe, recipeId) => async dispatch => {
   dispatch(updateRecipeStart());
@@ -116,7 +116,7 @@ const updateRecipeFail = error => ({
   error
 });
 
-// Delete a recipe
+// Delete a recipe.
 
 export const deleteRecipe = recipeId => async dispatch => {
   dispatch(deleteRecipeStart());

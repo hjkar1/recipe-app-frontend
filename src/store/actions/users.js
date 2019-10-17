@@ -2,9 +2,12 @@ import * as actionTypes from './actionTypes';
 import axios from '../../axiosInstance';
 import { getAuthHeaderConfig } from './utils';
 
+// Store the web token.
 const setToken = user => {
   window.localStorage.setItem('loggedInUser', JSON.stringify(user));
 };
+
+// Login
 
 export const login = user => async dispatch => {
   dispatch(loginStart());
@@ -42,6 +45,8 @@ const logoutSuccess = () => {
   };
 };
 
+// Signup
+
 export const signup = user => async dispatch => {
   dispatch(signupStart());
   try {
@@ -68,6 +73,8 @@ const signupFail = error => ({
 export const signupClear = () => ({
   type: actionTypes.SIGNUP_CLEAR
 });
+
+// Get ids of the user's recipes.
 
 export const getOwnRecipes = () => async dispatch => {
   dispatch(getOwnRecipesStart());
@@ -98,6 +105,7 @@ const getOwnRecipesFail = error => ({
   error
 });
 
+// Clear authentication error message from the store.
 export const clearErrorMessage = () => ({
   type: actionTypes.CLEAR_ERROR_MESSAGE
 });
