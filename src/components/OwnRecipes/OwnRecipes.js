@@ -50,13 +50,13 @@ export const OwnRecipes = ({
     pageContent = (
       <div className={classes.container}>
         {recipes
-          .filter(recipe => ownRecipes.indexOf(recipe._id) > -1)
+          .filter(recipe => ownRecipes.indexOf(recipe.id) > -1)
           .map(recipe => (
             <Link
               className={classes.recipeLink}
-              key={recipe._id}
+              key={recipe.id}
               component={RouterLink}
-              to={`/myrecipes/${recipe._id}`}
+              to={`/myrecipes/${recipe.id}`}
             >
               {recipe.title}
             </Link>

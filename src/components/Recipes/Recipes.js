@@ -111,9 +111,9 @@ export const Recipes = ({ error, loading, recipes, getRecipes }) => {
         {searchResults.map(recipe => (
           <Link
             className={classes.recipeLink}
-            key={recipe._id}
+            key={recipe.id}
             component={RouterLink}
-            to={`/recipes/${recipe._id}`}
+            to={`/recipes/${recipe.id}`}
           >
             {recipe.title}
           </Link>

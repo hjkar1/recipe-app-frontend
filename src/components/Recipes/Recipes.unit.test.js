@@ -17,19 +17,19 @@ test('renders 20 recipes', () => {
 test('filters the recipes by search terms', () => {
   const filteredMockRecipes = [
     {
-      _id: '1',
+      id: '1',
       title: 'Test title 1',
       ingredients: 'Test ingredients 1',
       instructions: 'Test instructions 1'
     },
     {
-      _id: '2',
+      id: '2',
       title: 'Filtered test title 2',
       ingredients: 'Test ingredients 2',
       instructions: 'Test instructions 2'
     },
     {
-      _id: '3',
+      id: '3',
       title: 'Test title 3',
       ingredients: 'Filtered test ingredients 3',
       instructions: 'Test instructions 3'
