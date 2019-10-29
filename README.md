@@ -1,3 +1,39 @@
+# recipe-app-frontend
+A React client that uses the [recipe REST API](https://github.com/hjkar1/recipe-app-backend). Enables displaying and searching recipes by title and ingredients. Logged in users can also create, modify and delete recipes.
+
+## Prerequisites
+You need to have npm and Node.js installed to run this app on your computer.
+
+You need to install and run also the backend to use this app.
+
+## Installing
+Clone the project and install dependencies:
+```
+git clone https://github.com/hjkar1/recipe-app-frontend
+cd recipe-app-frontend
+npm install
+```
+## Environment variables
+Create a **.env** file in the project root folder.
+
+Define following variables in the **.env** file:
+- URI for the backend used in development.
+- URI for the backend used in production.
+
+```
+REACT_APP_DEV_API=http://localhost:3001/api/
+
+REACT_APP_PROD_API=your-production-api-uri
+```
+
+## Using ESLint
+Use `npm run lint` to run ESLint.
+
+## Tests
+The app includes unit and integration tests for React components.
+
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
