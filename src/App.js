@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import './App.css';
 import ProtectedRoute from './ProtectedRoute';
 import Login from './components/auth/Login/Login';
 import Signup from './components/auth/Signup/Signup';
