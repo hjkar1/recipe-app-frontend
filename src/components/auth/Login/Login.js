@@ -22,9 +22,6 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(2)
   },
   submitButton: {
-    display: 'block',
-    margin: 'auto',
-    width: '50%',
     marginTop: theme.spacing(2)
   },
   errorMessage: {
